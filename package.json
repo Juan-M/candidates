@@ -16,8 +16,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "inst-all": "concurrently \"cd frontend && npm ci\" \"cd backend && npm ci\"",
     "start:fe": "cd frontend && ng serve",
-	  "start:be": "cd backend && nest start",
+	  "start:be": "cd backend && nest start --watch",
 	  "start": "concurrently \"npm run start:fe\" \"npm run start:be\""
   },
   "devDependencies": {
