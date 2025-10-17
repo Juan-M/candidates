@@ -20,6 +20,8 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Yes, you have reached The Backend. This is working! (but don\'t get used to it!');
+      .expect(
+        "Yes, you have reached The Backend. This is working! (but don't get used to it!",
+      );
   });
 });

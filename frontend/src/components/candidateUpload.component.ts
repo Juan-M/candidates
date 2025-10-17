@@ -1,25 +1,29 @@
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-candidateUpload',
+  selector: 'app-candidate-upload',
   templateUrl: './candidateUpload.component.html',
 })
 export class CandidateUploadComponent {
+  private fb = inject(FormBuilder);
+  private http = inject(HttpClient);
+
   uploadForm: FormGroup;
   selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor() {
     this.uploadForm = this.fb.group({
       name: [''],
       surname: [''],
     });
   }
 
-  onFileChange(event: any) {
-    this.selectedFile = event.target.files[0];
+  onFileChange(event: Event) {
+    const element = event.currentTarget as HTMLInputElement;
+    this.selectedFile = element?.files?.[0] || null;
   }
 
   onSubmit() {

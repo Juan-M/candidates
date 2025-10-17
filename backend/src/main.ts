@@ -7,7 +7,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Candidates API')
-    .setDescription('API to upload Excel files and return candidates parsed data')
+    .setDescription(
+      'API to upload Excel files and return candidates parsed data',
+    )
     .setVersion('1.0')
     .addTag('candidates')
     .build();
@@ -17,4 +19,4 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+void bootstrap();

@@ -15,7 +15,6 @@ import { CandidatesService } from '../services/candidates/candidates.service';
 //     UploadModule,
 //  ],
 
-
 @Module({
   imports: [CandidatesModule],
   controllers: [AppController],

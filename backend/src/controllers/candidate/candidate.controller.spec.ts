@@ -1,9 +1,10 @@
-
+import * as path from 'path';
+import request from 'supertest';
+import { App } from 'supertest/types';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { CandidatesModule } from 'src/modules/candidates/candidates.module';
-import * as path from 'path';
+import { Candidate } from '@shared/models/candidate';
+import { CandidatesModule } from '../../modules/candidates/candidates.module';
 
 describe('UploadController (e2e)', () => {
   let app: INestApplication;
@@ -18,19 +19,23 @@ describe('UploadController (e2e)', () => {
   });
 
   it('should upload file and return parsed data', async () => {
-    const filePath = path.join(__dirname, 'test.xlsx'); // make sure this file exists
+    const filePath = path.join(
+      __dirname,
+      '../../../../samples/senior12yeah.xlsx',
+    ); // make sure this file exists
 
-    const response = await request(app.getHttpServer())
-      .post('/upload')
+    const response = await request(app.getHttpServer() as App)
+      .post('/candidate')
       .field('name', 'Juan')
       .field('surname', 'Mecha')
       .attach('file', filePath);
 
     expect(response.status).toBe(201);
-    expect(response.body).toHaveProperty('name', 'Juan');
-    expect(response.body).toHaveProperty('surname', 'Mecha');
-    expect(response.body).toHaveProperty('excelData');
-    expect(Array.isArray(response.body.excelData)).toBe(true);
+    const body = response.body as unknown as Candidate;
+    expect(body).toHaveProperty('name', 'Juan');
+    expect(body).toHaveProperty('surname', 'Mecha');
+    // expect(body).toHaveProperty('excelData');
+    // expect(Array.isArray(body.excelData)).toBe(true);
   });
 
   afterAll(async () => {

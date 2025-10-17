@@ -1,4 +1,3 @@
-
 import {
   Controller,
   Post,
@@ -10,9 +9,9 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
-import { CandidatesService } from 'src/services/candidates/candidates.service';
-import { CandidateDto } from 'src/DTOs/candidates/candidate.dto';
 import { Candidate } from '@shared/models/candidate';
+import { CandidatesService } from '../../services/candidates/candidates.service';
+import { CandidateDto } from '../../DTOs/candidates/candidate.dto';
 
 @ApiTags('candidate')
 @Controller('candidate')
@@ -36,16 +35,20 @@ export class candidateController {
   })
   @UseInterceptors(FileInterceptor('file'))
   @UsePipes(new ValidationPipe({ transform: true }))
-  async handleCandidateParsing(
+  handleCandidateParsing(
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CandidateDto,
   ) {
     let json: Candidate;
     try {
-      json = this.candidatesService.parseCandidate(body.name, body.surname, file)
+      json = this.candidatesService.parseCandidate(
+        body.name,
+        body.surname,
+        file,
+      );
     } catch (e) {
       throw new UnprocessableEntityException(e);
-    } 
+    }
     return json;
   }
 }
