@@ -1,6 +1,19 @@
-<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-  <input type="text" formControlName="name" placeholder="Name" />
-  <input type="text" formControlName="surname" placeholder="Surname" />
-  <input type="file" (change)="onFileChange($event)" />
-  <button type="submit">Upload</button>
-</form>
+<mat-form-field>
+  <mat-label>Name</mat-label>
+  <input matInput (change)="onNameChange($event)">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Surname</mat-label>
+  <input matInput (change)="onSurnameChange($event)">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Choose file</mat-label>
+  <input type="file" #fileInput (change)="onFileChange($event)" hidden />
+  <input matInput [value]="file?.name" formControlName="file" readonly (click)="fileInput.click()">
+  <button mat-icon-button matSuffix (click)="fileInput.click()">
+    <mat-icon>attach_file</mat-icon>
+  </button>
+  @if(!isValid) {
+  <mat-error class='ms-0'>File is <strong>required</strong></mat-error>
+  }
+</mat-form-field>

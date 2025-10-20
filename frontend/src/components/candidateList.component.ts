@@ -22,7 +22,7 @@ export class CandidateListComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    this.store.dispatch(CandidateActions.loadCandidates());
+    // this.store.dispatch(CandidateActions.loadCandidates());
   }
 }
 

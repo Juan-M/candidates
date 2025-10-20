@@ -1,43 +1,31 @@
 
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-candidate-upload',
   standalone: true,
+  imports: [MatIconModule, MatFormFieldModule, MatInputModule],
+  styleUrl: './candidateUpload.scss',
   templateUrl: './candidateUpload.component.html',
 })
 export class CandidateUploadComponent {
-  private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
+  @Input() file: File | null = null;
+  @Input() isValid: boolean | null = null;
+  @Output() nameChanged = new EventEmitter<Event>();
+  @Output() surnameChanged = new EventEmitter<Event>();
+  @Output() fileChanged = new EventEmitter<Event>();
 
-  uploadForm: FormGroup;
-  selectedFile: File | null = null;
-
-  constructor() {
-    this.uploadForm = this.fb.group({
-      name: [''],
-      surname: [''],
-    });
+  onNameChange(event: Event): void {
+    this.nameChanged.emit(event);
+  }
+  onSurnameChange(event: Event): void {
+    this.surnameChanged.emit(event);
+  }
+  onFileChange(event: Event): void {
+    this.fileChanged.emit(event);
   }
 
-  onFileChange(event: Event) {
-    const element = event.currentTarget as HTMLInputElement;
-    this.selectedFile = element?.files?.[0] || null;
-  }
-
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('name', this.uploadForm.get('name')?.value);
-    formData.append('number', this.uploadForm.get('number')?.value);
-    if (this.selectedFile) {
-      formData.append('file', this.selectedFile);
-    }
-
-    this.http.post('http://localhost:3000/candidate', formData).subscribe({
-      next: (res) => console.log('Response:', res),
-      error: (err) => console.error('Error:', err),
-    });
-  }
 }
