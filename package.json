@@ -17,7 +17,7 @@
   "scripts": {
     "test": "jest",
     "inst-all": "concurrently \"cd frontend && npm ci\" \"cd backend && npm ci\"",
-    "start:fe": "cd frontend && ng serve",
+    "start:fe": "cd frontend && ng serve --watch",
 	  "start:be": "cd backend && nest start --watch",
 	  "start": "concurrently \"npm run start:fe\" \"npm run start:be\"",
     "lint": "cd backend && npm run lint && cd ../frontend && npm run lint"
