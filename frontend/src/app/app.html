@@ -3,32 +3,11 @@
     <div class="left-side">
       <h1>Candidates challenge</h1>
       <p>Yeah, you seeing this means that the {{ title() }} at least loads. 🎉</p>
-      <mat-card class="candidate-card" appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Add a new one</mat-card-title>
-          <mat-card-subtitle>Please, fill the basic info and select the source file</mat-card-subtitle>
-        </mat-card-header>
-        <!--app-candidate-upload /-->
-        <mat-card-content>
-          <p>
-            The spreadsheet must contain a single line with seniority in A1, experience in years in B1 and availability in C1.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button matButton>RESET</button>
-          <button matButton>ADD</button>
-        </mat-card-actions>
-      </mat-card>
+      <app-candidate-card></app-candidate-card>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
-      <mat-list>
-        <mat-list-item>Item 1</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Item 2</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Item 3</mat-list-item>
-      </mat-list>
+      <app-candidate-list></app-candidate-list>
     </div>
   </div>
 </main>

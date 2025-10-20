@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-candidate-upload',
+  standalone: true,
   templateUrl: './candidateUpload.component.html',
 })
 export class CandidateUploadComponent {

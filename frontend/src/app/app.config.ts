@@ -5,8 +5,8 @@ import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { candidateReducer } from '../store/candidates.reducer';
-import { CandidateEffects } from '../store/candidates.effects';
+import { candidateReducer } from '../store/candidates/candidates.reducer';
+import { CandidateEffects } from '../store/candidates/candidates.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [

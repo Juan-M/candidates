@@ -1,20 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
-import { CandidateUploadComponent } from 'src/components/candidateUpload.component';
+import { CandidateCardComponent } from '../components/candidateCard.component';
+import { CandidateListComponent } from '../components/candidateList.component';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    MatButtonModule,
-    MatCardModule,
-    CandidateUploadComponent,
-    MatListModule,
-    MatDividerModule
+    CandidateCardComponent,
+    CandidateListComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
