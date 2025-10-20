@@ -1,0 +1,21 @@
+ <mat-card class="candidate-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Add a new one</mat-card-title>
+    <mat-card-subtitle>Please, fill the basic info with the source file</mat-card-subtitle>
+  </mat-card-header>
+  <app-candidate-upload
+    (nameChanged)="handleNameChange($event)"
+    (surnameChanged)="handleSurnameChange($event)"
+    (fileChanged)="handleFileChange($event)"
+    [isValid]="uploadForm.get('file')?.valid ?? null"
+    [file]="selectedFile"
+  ></app-candidate-upload>
+  <mat-card-content>
+    <p>
+      The spreadsheet must contain a single line with seniority in A1, experience in years in B1 and availability in C1.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button matButton (click)="onClick()">ADD</button>
+  </mat-card-actions>
+</mat-card>
