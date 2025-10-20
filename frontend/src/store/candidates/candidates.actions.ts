@@ -1,0 +1,12 @@
+import { createAction, props } from '@ngrx/store';
+import { Candidate } from '@shared/models/candidate';
+
+export const loadCandidates = createAction('[Candidate] Load Candidates');
+export const loadCandidatesSuccess = createAction(
+  '[Candidate] Load Candidates Success',
+  props<{ candidates: Candidate[] }>()
+);
+export const loadCandidatesFailure = createAction(
+  '[Candidate] Load Candidates Failure',
+  props<{ error: Error }>()
+);
