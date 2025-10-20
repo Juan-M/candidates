@@ -1,4 +1,5 @@
 import * as XLSX from 'xlsx';
+import { randomUUID } from 'crypto';
 import { Injectable } from '@nestjs/common';
 import { Candidate, Ranks } from '@shared/models/candidate';
 import { AgreedSheet } from '@shared/models/sheetFormat';
@@ -31,7 +32,7 @@ export class CandidatesService {
       throw new Error(`Could not read the file: ${(e as Error).message}`);
     }
     return {
-      id: '0',
+      id: randomUUID(),
       name,
       surname,
       seniority,

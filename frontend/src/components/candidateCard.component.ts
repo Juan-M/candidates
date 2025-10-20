@@ -53,7 +53,6 @@ export class CandidateCardComponent {
 
   handleResponse(res: Object): void {
     const candidate = res as Candidate;
-    console.log('Response:', candidate, this.store);
     this.store.dispatch(CandidateActions.parseCandidatesSuccess({ candidate }));
   }
 
