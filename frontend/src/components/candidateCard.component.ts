@@ -1,11 +1,14 @@
 
+import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Candidate } from '@shared/models/candidate';
-import { CandidateUploadComponent } from './candidateUpload.component'; // Adjust path as needed
+import * as CandidateActions from '../store/candidates/candidates.actions';
+import { CandidateState } from '../store/candidates/candidates.reducer';
+import { CandidateUploadComponent } from './candidateUpload.component';
 
 @Component({
   selector: 'app-candidate-card',
@@ -19,14 +22,15 @@ import { CandidateUploadComponent } from './candidateUpload.component'; // Adjus
   styleUrl: './candidateCard.scss'
 })
 export class CandidateCardComponent {
-  private fb = inject(FormBuilder);
+  private store = inject<Store<{ candidateState: CandidateState }>>(Store);
+  private builtForm = inject(FormBuilder);
   private http = inject(HttpClient);
 
   uploadForm: FormGroup;
   selectedFile: File | null = null;
 
   constructor() {
-    this.uploadForm = this.fb.group({
+    this.uploadForm = this.builtForm.group({
       name: [''],
       surname: [''],
     });
@@ -47,8 +51,10 @@ export class CandidateCardComponent {
     this.selectedFile = element?.files?.[0] || null;
   }
 
-  handleResponse(res: Object): void{
-    console.log('Response:', res as Candidate)
+  handleResponse(res: Object): void {
+    const candidate = res as Candidate;
+    console.log('Response:', candidate, this.store);
+    this.store.dispatch(CandidateActions.parseCandidatesSuccess({ candidate }));
   }
 
   onClick() {
@@ -60,7 +66,7 @@ export class CandidateCardComponent {
     }
 
     this.http.post('http://localhost:3000/candidate', formData).subscribe({
-      next: this.handleResponse,
+      next: this.handleResponse.bind(this),
       error: (err) => console.error('Error:', err),
     });
   }

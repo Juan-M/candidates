@@ -10,3 +10,7 @@ export const loadCandidatesFailure = createAction(
   '[Candidate] Load Candidates Failure',
   props<{ error: Error }>()
 );
+export const parseCandidatesSuccess = createAction(
+  '[Candidate] Parse Candidate Success',
+  props<{ candidate: Candidate }>()
+);

@@ -19,6 +19,10 @@ export const candidateReducer = createReducer(
     ...state,
     candidates
   })),
+  on(CandidateActions.parseCandidatesSuccess, (state, { candidate }) => ({
+    ...state,
+    candidates: [ ...state.candidates, candidate ]
+  })),
   on(CandidateActions.loadCandidatesFailure, (state, { error }) => ({
     ...state,
     error

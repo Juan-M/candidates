@@ -9,7 +9,7 @@
 <mat-form-field>
   <mat-label>Choose file</mat-label>
   <input type="file" #fileInput (change)="onFileChange($event)" hidden />
-  <input matInput [value]="file?.name" formControlName="file" readonly (click)="fileInput.click()">
+  <input matInput tabindex="-1" [value]="file?.name" formControlName="file" readonly (click)="fileInput.click()">
   <button mat-icon-button matSuffix (click)="fileInput.click()">
     <mat-icon>attach_file</mat-icon>
   </button>

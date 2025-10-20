@@ -13,11 +13,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideStore(),
-    provideEffects(),
+    provideStore({ candidateState: candidateReducer }),
+    provideEffects([CandidateEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideHttpClient(),
-    provideStore({ candidateState: candidateReducer }), // Candidates Store setup
-    provideEffects([CandidateEffects]), // Candidates Effects setup
   ]
 };
