@@ -1,44 +1,70 @@
-import * as path from 'path';
-import request from 'supertest';
-import { App } from 'supertest/types';
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import { Candidate } from '@shared/models/candidate';
-import { CandidatesModule } from '../../modules/candidates/candidates.module';
+import { candidateController } from './candidate.controller';
+import { CandidatesService } from '../../services/candidates/candidates.service';
+import { UnprocessableEntityException } from '@nestjs/common';
+import { CandidateDto } from '../../DTOs/candidates/candidate.dto';
+import { Candidate, Ranks } from '@shared/models/candidate';
 
-describe('UploadController (e2e)', () => {
-  let app: INestApplication;
+describe('candidateController', () => {
+  let controller: candidateController;
+  let service: CandidatesService;
 
-  beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [CandidatesModule],
+  const mockCandidatesService = {
+    parseCandidate: jest.fn(),
+  };
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [candidateController],
+      providers: [
+        {
+          provide: CandidatesService,
+          useValue: mockCandidatesService,
+        },
+      ],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
+    controller = module.get<candidateController>(candidateController);
+    service = module.get<CandidatesService>(CandidatesService);
   });
 
-  it('should upload file and return parsed data', async () => {
-    const filePath = path.join(
-      __dirname,
-      '../../../../samples/senior12yeah.xlsx',
-    ); // make sure this file exists
+  it('should return parsed candidate on success', () => {
+    const mockFile = {
+      buffer: Buffer.from('mock file content'),
+    } as Express.Multer.File;
+    const mockBody: CandidateDto = { name: 'John', surname: 'Doe' };
+    const mockCandidate: Candidate = {
+      id: '0mocks',
+      name: 'John',
+      surname: 'Doe',
+      seniority: 'senior' as Ranks,
+      years: 12,
+      availability: true,
+    };
 
-    const response = await request(app.getHttpServer() as App)
-      .post('/candidate')
-      .field('name', 'Juan')
-      .field('surname', 'Mecha')
-      .attach('file', filePath);
+    mockCandidatesService.parseCandidate.mockReturnValue(mockCandidate);
 
-    expect(response.status).toBe(201);
-    const body = response.body as unknown as Candidate;
-    expect(body).toHaveProperty('name', 'Juan');
-    expect(body).toHaveProperty('surname', 'Mecha');
-    // expect(body).toHaveProperty('excelData');
-    // expect(Array.isArray(body.excelData)).toBe(true);
+    const result = controller.handleCandidateParsing(mockFile, mockBody);
+    expect(result).toEqual(mockCandidate);
+    expect(service.parseCandidate).toHaveBeenCalledWith(
+      'John',
+      'Doe',
+      mockFile,
+    );
   });
 
-  afterAll(async () => {
-    await app.close();
+  it('should throw UnprocessableEntityException on parse error', () => {
+    const mockFile = {
+      buffer: Buffer.from('invalid file'),
+    } as Express.Multer.File;
+    const mockBody: CandidateDto = { name: 'Jane', surname: 'Smith' };
+
+    mockCandidatesService.parseCandidate.mockImplementation(() => {
+      throw new Error('Parse error');
+    });
+
+    expect(() => controller.handleCandidateParsing(mockFile, mockBody)).toThrow(
+      UnprocessableEntityException,
+    );
   });
 });
