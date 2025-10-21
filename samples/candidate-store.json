@@ -1,0 +1,53 @@
+{
+  "candidates": [
+    {
+      "id": "51aaf25c-cf66-430d-aa6b-e3ad548cd99b",
+      "name": "Vladimirovich",
+      "surname": "Rachmaninov",
+      "seniority": "senior",
+      "years": 15,
+      "availability": false
+    },
+    {
+      "id": "b54321a6-05fb-4b1b-8be1-52ff4e55106a",
+      "name": "Juan",
+      "surname": "Mecha",
+      "seniority": "senior",
+      "years": 15,
+      "availability": false
+    },
+    {
+      "id": "a69615c0-b97d-4dbc-8163-5341d4019b21",
+      "name": "John",
+      "surname": "Wick",
+      "seniority": "senior",
+      "years": 12,
+      "availability": true
+    },
+    {
+      "id": "19837889-0fdb-4de9-a5e2-00d6979298c8",
+      "name": "John",
+      "surname": "Snow",
+      "seniority": "junior",
+      "years": 3,
+      "availability": true
+    },
+    {
+      "id": "b4b7da61-9fef-483d-9813-9e6bf360f859",
+      "name": "Jane",
+      "surname": "Snow",
+      "seniority": "junior",
+      "years": 1,
+      "availability": true
+    },
+    {
+      "id": "0e3e5978-5b88-4c7d-a01a-6ae0093d68c4",
+      "name": "Juanita",
+      "surname": "Nieves",
+      "seniority": "junior",
+      "years": 1,
+      "availability": false
+    }
+  ],
+  "error": null
+}

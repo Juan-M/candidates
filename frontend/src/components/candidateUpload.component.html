@@ -1,19 +1,25 @@
 <mat-form-field>
   <mat-label>Name</mat-label>
-  <input matInput (change)="onNameChange($event)">
+  <input #nameInput matInput (change)="onNameChange($event)" required>
+  @if (uploadForm.get('name')?.invalid && uploadForm.get('name')?.touched) {
+    <sub><mat-error>Name is <strong>required</strong></mat-error></sub>
+  }
 </mat-form-field>
 <mat-form-field>
   <mat-label>Surname</mat-label>
-  <input matInput (change)="onSurnameChange($event)">
+  <input #surnameInput matInput (change)="onSurnameChange($event)" required>
+  @if (uploadForm.get('surname')?.invalid && uploadForm.get('surname')?.touched) {
+    <sub><mat-error>Surname is <strong>required</strong></mat-error></sub>
+  }
 </mat-form-field>
 <mat-form-field>
   <mat-label>Choose file</mat-label>
   <input type="file" #fileInput (change)="onFileChange($event)" hidden />
-  <input matInput tabindex="-1" [value]="file?.name" formControlName="file" readonly (click)="fileInput.click()">
+  <input #fileInput matInput tabindex="-1" [value]="file?.name" formControlName="file" readonly (click)="fileInput.click()" required>
   <button mat-icon-button matSuffix (click)="fileInput.click()">
     <mat-icon>attach_file</mat-icon>
   </button>
-  @if(!isValid) {
-  <mat-error class='ms-0'>File is <strong>required</strong></mat-error>
+  @if (uploadForm.get('file')?.invalid && uploadForm.get('file')?.touched) {
+    <sub><mat-error>File is <strong>required</strong></mat-error></sub>
   }
 </mat-form-field>

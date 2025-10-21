@@ -1,8 +1,9 @@
 
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-candidate-upload',
@@ -13,7 +14,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class CandidateUploadComponent {
   @Input() file: File | null = null;
-  @Input() isValid: boolean | null = null;
+  @Input() uploadForm!: FormGroup;
   @Output() nameChanged = new EventEmitter<Event>();
   @Output() surnameChanged = new EventEmitter<Event>();
   @Output() fileChanged = new EventEmitter<Event>();

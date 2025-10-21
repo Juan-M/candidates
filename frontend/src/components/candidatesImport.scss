@@ -1,0 +1,18 @@
+.importer-module {
+  background-color: darkgrey;
+  display: block;
+  height: 2rem;
+  padding: 0.4rem 0.5rem;
+  position: relative;
+  width: 100%;
+}
+
+.import {
+  cursor: pointer;
+  float: left;
+}
+
+.export {
+  cursor: pointer;
+  float: right;
+}

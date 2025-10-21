@@ -3,19 +3,25 @@
     <mat-card-title>Add a new one</mat-card-title>
     <mat-card-subtitle>Please, fill the basic info with the source file</mat-card-subtitle>
   </mat-card-header>
-  <app-candidate-upload
-    (nameChanged)="handleNameChange($event)"
-    (surnameChanged)="handleSurnameChange($event)"
-    (fileChanged)="handleFileChange($event)"
-    [isValid]="uploadForm.get('file')?.valid ?? null"
-    [file]="selectedFile"
-  ></app-candidate-upload>
+  @if (isProcessing()) {
+    <mat-spinner style="margin: 8rem 0; margin-left: calc(50% - 50px); position: absolute; z-index: 1"></mat-spinner>
+  }
+  @if (!resetFields()) {
+    <app-candidate-upload
+      #appCandidateUpload
+      [file]="selectedFile"
+      [uploadForm]="uploadForm"
+      (nameChanged)="handleNameChange($event)"
+      (surnameChanged)="handleSurnameChange($event)"
+      (fileChanged)="handleFileChange($event)"
+    ></app-candidate-upload>
+  }
   <mat-card-content>
     <p>
       The spreadsheet must contain a single line with seniority in A1, experience in years in B1 and availability in C1.
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button matButton (click)="onClick()">ADD</button>
+    <button matButton [class.shake]="shakeButton()" (click)="onClick()">ADD</button>
   </mat-card-actions>
 </mat-card>

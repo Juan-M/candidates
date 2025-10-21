@@ -1,7 +1,7 @@
 
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,17 +17,15 @@ import { CandidateState } from '../store/candidates/candidates.reducer';
   styleUrl: './candidateList.scss',
   templateUrl: './candidateList.component.html',
 })
-export class CandidateListComponent implements OnInit {
+export class CandidateListComponent {
   private store = inject<Store<{ candidateState: CandidateState }>>(Store);
 
   candidates$: Observable<Candidate[]> = this.store.select(
     state => state.candidateState.candidates
   );
 
-  ngOnInit(): void {
-    // TODO: Add save and load feature
-    console.log('!!!!---->>>>>', this.store);
-    // this.store.dispatch(CandidateActions.loadCandidates());
+  delete(candidate: Candidate) {
+    this.store.dispatch(CandidateActions.deleteCandidate(candidate));
   }
 }
 
