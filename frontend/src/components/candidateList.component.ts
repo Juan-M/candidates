@@ -17,7 +17,7 @@ import { CandidateState } from '../store/candidates/candidates.reducer';
   styleUrl: './candidateList.scss',
   templateUrl: './candidateList.component.html',
 })
-export class CandidateListComponent implements OnInit {
+export class CandidateListComponent {
   private store = inject<Store<{ candidateState: CandidateState }>>(Store);
 
   candidates$: Observable<Candidate[]> = this.store.select(
@@ -26,12 +26,6 @@ export class CandidateListComponent implements OnInit {
 
   delete(candidate: Candidate) {
     this.store.dispatch(CandidateActions.deleteCandidate(candidate));
-  }
-
-  ngOnInit(): void {
-    // TODO: Add save and load feature
-    console.log('!!!!---->>>>>', this.store);
-    // this.store.dispatch(CandidateActions.loadCandidates());
   }
 }
 

@@ -15,17 +15,22 @@ export const initialState: CandidateState = {
 
 export const candidateReducer = createReducer(
   initialState,
-  on(CandidateActions.loadCandidatesSuccess, (state, { candidates }) => ({
+  on(CandidateActions.loadCandidatesFromFile, (state, { candidates }) => ({
     ...state,
-    candidates
+    candidates: [...state.candidates, ...candidates]
+      .filter((candidate, i, self) => i === self.findIndex(c => c.id === candidate.id)),
   })),
   on(CandidateActions.parseCandidatesSuccess, (state, { candidate }) => ({
     ...state,
-    candidates: [ ...state.candidates, candidate ]
+    candidates: [...state.candidates, candidate]
   })),
   on(CandidateActions.deleteCandidate, (state, { id }) => ({
     ...state,
-    candidates: state.candidates.filter( c => c.id !== id)
+    candidates: state.candidates.filter(c => c.id !== id)
+  })),
+  on(CandidateActions.loadCandidatesSuccess, (state, { candidates }) => ({
+    ...state,
+    candidates
   })),
   on(CandidateActions.loadCandidatesFailure, (state, { error }) => ({
     ...state,
