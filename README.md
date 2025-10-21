@@ -29,4 +29,4 @@ Please excuse and disregard all that install ugliness.
 
 ### Pending
 
-- Proper test setup and coverage. I'll be spending a little bit more time in that for a while, but depending on the following steps for this challenge proposal I might leave it as it is.
+- Proper test setup and coverage for the frontend. I might be spending a little bit more time in that for a while, but depending on the following steps for this challenge proposal I might leave it as it is, given that my testing skills are probably already shown with the backend.
