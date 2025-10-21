@@ -24,6 +24,10 @@ export class CandidateListComponent implements OnInit {
     state => state.candidateState.candidates
   );
 
+  delete(candidate: Candidate) {
+    this.store.dispatch(CandidateActions.deleteCandidate(candidate));
+  }
+
   ngOnInit(): void {
     // TODO: Add save and load feature
     console.log('!!!!---->>>>>', this.store);

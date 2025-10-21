@@ -23,6 +23,10 @@ export const candidateReducer = createReducer(
     ...state,
     candidates: [ ...state.candidates, candidate ]
   })),
+  on(CandidateActions.deleteCandidate, (state, { id }) => ({
+    ...state,
+    candidates: state.candidates.filter( c => c.id !== id)
+  })),
   on(CandidateActions.loadCandidatesFailure, (state, { error }) => ({
     ...state,
     error

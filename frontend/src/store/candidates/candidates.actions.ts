@@ -14,3 +14,7 @@ export const parseCandidatesSuccess = createAction(
   '[Candidate] Parse Candidate Success',
   props<{ candidate: Candidate }>()
 );
+export const deleteCandidate = createAction(
+  '[Candidate] Delete Candidate',
+  props<{ id: string }>()
+);
