@@ -64,7 +64,7 @@ export class CandidateCardComponent {
     this.uploadForm.get('file')?.setValue(this.selectedFile || null);
   }
 
-  handleResponse(res: Object): void {
+  handleResponse(res: object): void {
     const candidate = res as Candidate;
     this.store.dispatch(CandidateActions.parseCandidatesSuccess({ candidate }));
     this.uploadForm.reset();

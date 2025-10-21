@@ -32,11 +32,10 @@ export class CandidatesImportComponent {
       try {
         const importedStore = JSON.parse(reader.result as string);
         // Dispatch action to store candidates
-        console.log('!!!--->>>', importedStore.candidates);
         this.store.dispatch(CandidateActions.loadCandidatesFromFile({ candidates: importedStore.candidates }));
         element.files = new DataTransfer().files;
       } catch (err) {
-        this.openSnackBar('Invalid JSON file format.', 'Close');
+        this.openSnackBar(`Invalid JSON file format.: ${(err as Error).message}`, 'Close');
       }
     };
     reader.readAsText(file);
