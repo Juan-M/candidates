@@ -18,9 +18,15 @@ And http://localhost:3000/api for the backend's swagger
 This exercise has been constructed in a limited time frame, specifically according to a certain code challenge and its requirements, without paying too much attention to matters I'd normally care about in real projects. For example, I have not done an extensive due diligence for the versions and dependencies I'm using here. Some of them are too brand new and may present warnings that are not yet possible to be fixed. In real world I'd fallback to known LTS versions, but for this learning exercise, all is fine 🔥🐕🔥.
 Please excuse and disregard all that install ugliness.
 
+### Usage
+
+![myimage](docs/candidatesMain.png?raw=true)
+
+- Add candidates to the list by using the left side form
+- Delete candidates from the list with the bin buttons in the elements of the list of candidates
+- Export the current candidates to a file using the export button in the right upper corner.
+- Import the candidates in an exported file using the import button at the left upper corner of the candidates list.
+
 ### Pending
 
-- Basic form validation.
-- Extend features, like adding a delete to remove candidates or a load/save feature.
-- Better error handling for the backend.
-- Proper test setup and coverage
+- Proper test setup and coverage. I'll be spending a little bit more time in that for a while, but depending on the following steps for this challenge proposal I might leave it as it is.
