@@ -5,6 +5,10 @@ import { CandidateService } from '../../services/candidates.service';
 import * as CandidateActions from './candidates.actions';
 import { catchError, map, mergeMap, of } from 'rxjs';
 
+// this is not actually used at the end since the backend doesn't hold information of the candidates
+// but I kept it as a token of how it would work if it would be needed.
+// In a normal project I'd clean it up right away to avoid cluttering.
+
 @Injectable()
 export class CandidateEffects {
 
