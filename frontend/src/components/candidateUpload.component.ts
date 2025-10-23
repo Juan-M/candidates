@@ -1,5 +1,5 @@
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -13,20 +13,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './candidateUpload.component.html',
 })
 export class CandidateUploadComponent {
-  @Input() file: File | null = null;
   @Input() uploadForm!: FormGroup;
-  @Output() nameChanged = new EventEmitter<Event>();
-  @Output() surnameChanged = new EventEmitter<Event>();
-  @Output() fileChanged = new EventEmitter<Event>();
 
   onNameChange(event: Event): void {
-    this.nameChanged.emit(event);
-  }
-  onSurnameChange(event: Event): void {
-    this.surnameChanged.emit(event);
-  }
-  onFileChange(event: Event): void {
-    this.fileChanged.emit(event);
+    const element = event.currentTarget as HTMLInputElement;
+    this.uploadForm.get('name')?.setValue(element?.value || null);
   }
 
+  onSurnameChange(event: Event): void {
+    const element = event.currentTarget as HTMLInputElement;
+    this.uploadForm.get('surname')?.setValue(element?.value || null);
+  }
+
+  onFileChange(event: Event): void {
+    const element = event.currentTarget as HTMLInputElement;
+    const selectedFile = element?.files?.[0] || null;
+    this.uploadForm.get('file')?.setValue(selectedFile);
+  }
 }
