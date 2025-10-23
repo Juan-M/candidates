@@ -47,22 +47,6 @@ export class CandidateCardComponent {
     this._snackBar.open(message, action);
   }
 
-  handleNameChange(event: Event): void {
-    const element = event.currentTarget as HTMLInputElement;
-    this.uploadForm.get('name')?.setValue(element?.value || null);
-  }
-
-  handleSurnameChange(event: Event): void {
-    const element = event.currentTarget as HTMLInputElement;
-    this.uploadForm.get('surname')?.setValue(element?.value || null);
-  }
-
-  handleFileChange(event: Event): void {
-    const element = event.currentTarget as HTMLInputElement;
-    const selectedFile = element?.files?.[0] || null;
-    this.uploadForm.get('file')?.setValue(selectedFile);
-  }
-
   handleResponse(res: object): void {
     const candidate = res as Candidate;
     this.store.dispatch(CandidateActions.parseCandidatesSuccess({ candidate }));

@@ -14,17 +14,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class CandidateUploadComponent {
   @Input() uploadForm!: FormGroup;
-  @Output() nameChanged = new EventEmitter<Event>();
-  @Output() surnameChanged = new EventEmitter<Event>();
-  @Output() fileChanged = new EventEmitter<Event>();
 
   onNameChange(event: Event): void {
-    this.nameChanged.emit(event);
+    const element = event.currentTarget as HTMLInputElement;
+    this.uploadForm.get('name')?.setValue(element?.value || null);
   }
+
   onSurnameChange(event: Event): void {
-    this.surnameChanged.emit(event);
+    const element = event.currentTarget as HTMLInputElement;
+    this.uploadForm.get('surname')?.setValue(element?.value || null);
   }
+
   onFileChange(event: Event): void {
-    this.fileChanged.emit(event);
+    const element = event.currentTarget as HTMLInputElement;
+    const selectedFile = element?.files?.[0] || null;
+    this.uploadForm.get('file')?.setValue(selectedFile);
   }
 }
