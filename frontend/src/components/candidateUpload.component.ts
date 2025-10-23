@@ -1,5 +1,5 @@
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, computed, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -13,7 +13,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './candidateUpload.component.html',
 })
 export class CandidateUploadComponent {
-  @Input() file: File | null = null;
   @Input() uploadForm!: FormGroup;
   @Output() nameChanged = new EventEmitter<Event>();
   @Output() surnameChanged = new EventEmitter<Event>();
@@ -28,5 +27,4 @@ export class CandidateUploadComponent {
   onFileChange(event: Event): void {
     this.fileChanged.emit(event);
   }
-
 }

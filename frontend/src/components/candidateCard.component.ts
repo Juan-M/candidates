@@ -34,7 +34,6 @@ export class CandidateCardComponent {
   resetFields = signal(false);
 
   uploadForm: FormGroup;
-  selectedFile: File | null = null;
 
   constructor() {
     this.uploadForm = this.builtForm.group({
@@ -60,8 +59,8 @@ export class CandidateCardComponent {
 
   handleFileChange(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
-    this.selectedFile = element?.files?.[0] || null;
-    this.uploadForm.get('file')?.setValue(this.selectedFile || null);
+    const selectedFile = element?.files?.[0] || null;
+    this.uploadForm.get('file')?.setValue(selectedFile);
   }
 
   handleResponse(res: object): void {
@@ -69,7 +68,6 @@ export class CandidateCardComponent {
     this.store.dispatch(CandidateActions.parseCandidatesSuccess({ candidate }));
     this.uploadForm.reset();
     this.resetFields.set(true);
-    this.selectedFile = null;
     this.isProcessing.set(false);
     setTimeout(() => this.resetFields.set(false), 0);
   }
@@ -93,9 +91,7 @@ export class CandidateCardComponent {
     const formData = new FormData();
     formData.append('name', this.uploadForm.get('name')?.value);
     formData.append('surname', this.uploadForm.get('surname')?.value);
-    if (this.selectedFile) {
-      formData.append('file', this.selectedFile);
-    }
+    formData.append('file', this.uploadForm.get('file')?.value);
 
     this.isProcessing.set(true);
     this.http.post('http://localhost:3000/candidate', formData).subscribe({

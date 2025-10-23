@@ -9,7 +9,6 @@
   @if (!resetFields()) {
     <app-candidate-upload
       #appCandidateUpload
-      [file]="selectedFile"
       [uploadForm]="uploadForm"
       (nameChanged)="handleNameChange($event)"
       (surnameChanged)="handleSurnameChange($event)"
