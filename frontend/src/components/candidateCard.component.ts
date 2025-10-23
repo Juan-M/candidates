@@ -1,12 +1,12 @@
 
 import { Store } from '@ngrx/store';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CandidateService } from 'src/services/candidates.service';
 import { Candidate } from '@shared/models/candidate';
 import * as CandidateActions from '../store/candidates/candidates.actions';
 import { CandidateState } from '../store/candidates/candidates.reducer';
@@ -27,8 +27,9 @@ import { CandidateUploadComponent } from './candidateUpload.component';
 export class CandidateCardComponent {
   private store = inject<Store<{ candidateState: CandidateState }>>(Store);
   private builtForm = inject(FormBuilder);
-  private http = inject(HttpClient);
   private _snackBar = inject(MatSnackBar);
+  private candidateService = inject(CandidateService);
+
   isProcessing = signal(false);
   shakeButton = signal(false);
   resetFields = signal(false);
@@ -47,40 +48,28 @@ export class CandidateCardComponent {
     this._snackBar.open(message, action);
   }
 
-  handleResponse(res: object): void {
-    const candidate = res as Candidate;
-    this.store.dispatch(CandidateActions.parseCandidatesSuccess({ candidate }));
-    this.uploadForm.reset();
-    this.resetFields.set(true);
-    this.isProcessing.set(false);
-    setTimeout(() => this.resetFields.set(false), 0);
-  }
-
-  handleErrorResponse(err: Error): void {
-    this.openSnackBar(`Woopsies!!! ${err.message}`, 'Close');
-    this.isProcessing.set(false);
-  }
-
   onClick() {
     if (this.uploadForm.invalid) {
       this.uploadForm.markAllAsTouched(); // Show validation errors
       this.openSnackBar('Please fill out all required fields correctly.', 'Close');
-
       this.shakeButton.set(true);
       setTimeout(() => this.shakeButton.set(false), 400); // Reset after animation
-
       return;
     }
-
-    const formData = new FormData();
-    formData.append('name', this.uploadForm.get('name')?.value);
-    formData.append('surname', this.uploadForm.get('surname')?.value);
-    formData.append('file', this.uploadForm.get('file')?.value);
-
     this.isProcessing.set(true);
-    this.http.post('http://localhost:3000/candidate', formData).subscribe({
-      next: this.handleResponse.bind(this),
-      error: this.handleErrorResponse.bind(this),
+
+    this.candidateService.parseCandidate(this.uploadForm).subscribe({
+      next: (candidate: Candidate): void => {
+        this.store.dispatch(CandidateActions.parseCandidatesSuccess({ candidate }));
+        this.uploadForm.reset();
+        this.resetFields.set(true);
+        this.isProcessing.set(false);
+        setTimeout(() => this.resetFields.set(false), 0);
+      },
+      error: (err: Error): void => {
+        this.openSnackBar(`Woopsies!!! ${err.message}`, 'Close');
+        this.isProcessing.set(false);
+      },
     });
   }
 }
