@@ -16,7 +16,7 @@
   <mat-label>Choose file</mat-label>
   <input type="file" #fileInput (change)="onFileChange($event)" hidden />
   <input #fileInput matInput tabindex="-1" [value]="uploadForm.get('file')?.value?.name || ''" formControlName="file" readonly (click)="fileInput.click()" required>
-  <button mat-icon-button matSuffix (click)="fileInput.click()">
+  <button mat-icon-button matSuffix aria-label="Select File" (click)="fileInput.click()">
     <mat-icon>attach_file</mat-icon>
   </button>
   @if (uploadForm.get('file')?.invalid && uploadForm.get('file')?.touched) {
