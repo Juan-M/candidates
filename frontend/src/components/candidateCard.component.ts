@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CandidateService } from 'src/services/candidates.service';
+import { CandidateApiService } from 'src/services/candidatesApi.service';
 import { Candidate } from '@shared/models/candidate';
 import * as CandidateActions from '../store/candidates/candidates.actions';
 import { CandidateState } from '../store/candidates/candidates.reducer';
@@ -28,7 +28,7 @@ export class CandidateCardComponent {
   private store = inject<Store<{ candidateState: CandidateState }>>(Store);
   private builtForm = inject(FormBuilder);
   private _snackBar = inject(MatSnackBar);
-  private candidateService = inject(CandidateService);
+  private candidateService = inject(CandidateApiService);
 
   isProcessing = signal(false);
   shakeButton = signal(false);

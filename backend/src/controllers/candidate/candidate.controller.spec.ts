@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { candidateController } from './candidate.controller';
+import { CandidateController } from './candidate.controller';
 import { CandidatesService } from '../../services/candidates/candidates.service';
 import { UnprocessableEntityException } from '@nestjs/common';
 import { CandidateDto } from '../../DTOs/candidates/candidate.dto';
 import { Candidate, Ranks } from '@shared/models/candidate';
 
 describe('candidateController', () => {
-  let controller: candidateController;
+  let controller: CandidateController;
   let service: CandidatesService;
 
   const mockCandidatesService = {
@@ -15,7 +15,7 @@ describe('candidateController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [candidateController],
+      controllers: [CandidateController],
       providers: [
         {
           provide: CandidatesService,
@@ -24,7 +24,7 @@ describe('candidateController', () => {
       ],
     }).compile();
 
-    controller = module.get<candidateController>(candidateController);
+    controller = module.get<CandidateController>(CandidateController);
     service = module.get<CandidatesService>(CandidatesService);
   });
 
