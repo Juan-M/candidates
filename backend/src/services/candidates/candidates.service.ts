@@ -19,7 +19,7 @@ export class CandidatesService {
     let availability: boolean;
     try {
       if (sheet.A1.v === Ranks.SENIOR || sheet.A1.v === Ranks.JUNIOR) {
-        // if number of keys would go up, this would become a little bit more pro
+        // as the number of keys would go up, this would become a little bit more pro
         seniority = sheet.A1.v;
       } else {
         throw new Error(
@@ -28,6 +28,7 @@ export class CandidatesService {
       }
       years = sheet.B1.v; // TODO: we could add number validation the same way than for the enum
       availability = sheet.C1.v; // TODO: we could add boolean validation the same way than for the enum
+      // TODO: OR we could create a class DTO with class-validator for the file
     } catch (e) {
       throw new Error(`Could not read the file: ${(e as Error).message}`);
     }

@@ -15,6 +15,6 @@ import { CandidatesImportComponent } from '../components/candidatesImport/candid
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class AppComponent {
   protected readonly title = signal('frontend');
 }
