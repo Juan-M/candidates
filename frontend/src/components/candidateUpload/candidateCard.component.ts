@@ -8,8 +8,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CandidateApiService } from 'src/services/candidatesApi.service';
 import { Candidate } from '@shared/models/candidate';
-import * as CandidateActions from '../store/candidates/candidates.actions';
-import { CandidateState } from '../store/candidates/candidates.reducer';
+import * as CandidateActions from '../../store/candidates/candidates.actions';
+import { CandidateState } from '../../store/candidates/candidates.reducer';
 import { CandidateUploadComponent } from './candidateUpload.component';
 
 @Component({

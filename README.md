@@ -18,6 +18,9 @@ And http://localhost:3000/api for the backend's swagger
 This exercise has been constructed in a limited time frame, specifically according to a certain code challenge and its requirements, without paying too much attention to matters I'd normally care about in real projects. For example, I've not minded about SSL/TLS, since this is not going to be run anywhere else than in localhost; I have not done an extensive due diligence for the versions and dependencies I'm using here. Some of them are too brand new and may present warnings that are not yet possible to be fixed. In real world I'd fallback to known LTS versions, but for this learning exercise, all is fine 🔥🐕🔥.
 Please excuse and disregard all that ugliness.
 
+Furthermore I didn't bother with usual flow supporting constructs that real projects would have: code quality, logging, CD/CI, envs, AuthN/AuthZ, CORs, etc.
+That can be attributed to either of these two soft skills any architect should have: be smartly lazy (don't do work that doesn't need to be done) and know your scope (we all have our orders, there is some room for recreational perfection hunting, but all in a good balance).
+
 ### Usage
 
 ![myimage](docs/candidatesMain.png?raw=true)
