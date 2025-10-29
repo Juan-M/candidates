@@ -11,7 +11,7 @@
         <p matListItemLine>
           <span>{{candidate.seniority}}</span>
           <span> -- {{candidate.years}} year{{candidate.years > 1 ? 's': ''}} </span>
-          <button mat-icon-button class="bin" (click)="delete(candidate)">
+          <button mat-icon-button title="Delete" aria-label="Delete" class="bin" (click)="delete(candidate)">
             <mat-icon>delete</mat-icon>
           </button>
         </p>

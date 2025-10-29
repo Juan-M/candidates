@@ -1,0 +1,9 @@
+<div class="importer-module">
+  <input type="file" #fileInput (change)="import($event)" hidden />
+  <button mat-icon-button title="Import Candidates" aria-label="Import Candidates" class="import" (click)="fileInput.click()">
+    <mat-icon>upload</mat-icon>
+  </button>
+  <button mat-icon-button title="Export Candidates" aria-label="Export Candidates" class="export" (click)="export()">
+    <mat-icon>download</mat-icon>
+  </button>
+</div>

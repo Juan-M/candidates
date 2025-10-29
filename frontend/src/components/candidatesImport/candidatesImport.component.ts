@@ -3,8 +3,8 @@ import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as CandidateActions from '../store/candidates/candidates.actions';
-import { CandidateState } from '../store/candidates/candidates.reducer';
+import * as CandidateActions from '../../store/candidates/candidates.actions';
+import { CandidateState } from '../../store/candidates/candidates.reducer';
 
 @Component({
   selector: 'app-candidates-import',

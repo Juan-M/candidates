@@ -8,7 +8,8 @@ import { FormGroup } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
-export class CandidateService {
+export class CandidateApiService {
+  // TODO: This hardcoded URL would be in the envs in a real project
   private apiUrl = 'http://localhost:3000/candidate';
 
   private http = inject(HttpClient);

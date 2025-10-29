@@ -15,7 +15,7 @@ import { CandidateDto } from '../../DTOs/candidates/candidate.dto';
 
 @ApiTags('candidate')
 @Controller('candidate')
-export class candidateController {
+export class CandidateController {
   constructor(private readonly candidatesService: CandidatesService) {}
 
   @Post()

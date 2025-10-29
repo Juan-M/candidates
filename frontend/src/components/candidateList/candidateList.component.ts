@@ -7,8 +7,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Candidate } from '@shared/models/candidate';
-import * as CandidateActions from '../store/candidates/candidates.actions';
-import { CandidateState } from '../store/candidates/candidates.reducer';
+import * as CandidateActions from '../../store/candidates/candidates.actions';
+import { CandidateState } from '../../store/candidates/candidates.reducer';
 
 @Component({
   selector: 'app-candidate-list',

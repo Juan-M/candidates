@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CandidateCardComponent } from '../components/candidateCard.component';
-import { CandidateListComponent } from '../components/candidateList.component';
-import { CandidatesImportComponent } from '../components/candidatesImport.component';
+import { CandidateCardComponent } from '../components/candidateUpload/candidateCard.component';
+import { CandidateListComponent } from '../components/candidateList/candidateList.component';
+import { CandidatesImportComponent } from '../components/candidatesImport/candidatesImport.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,6 @@ import { CandidatesImportComponent } from '../components/candidatesImport.compon
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class AppComponent {
   protected readonly title = signal('frontend');
 }
